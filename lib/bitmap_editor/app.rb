@@ -49,7 +49,9 @@ module BitmapEditor
       when 'I'
         @image = Image.new(*params)
       when 'C'
+        @image.clear
       when 'L'
+        @image.colour(*params)
       when 'V'
       when 'H'
       when 'F'

@@ -33,6 +33,24 @@ module BitmapEditor
         its(:show) { should eql("OOOOO\nOOOOO\nOOOOO\nOOOOO\nOOOOO") }
       end
 
+      describe "#colour" do
+        let(:image) { subject.new(4,4) }
+
+        it 'colours the image with A at X1 Y2' do
+          image.colour(1, 2, 'A')
+          image.show.should eql("OOOO\nAOOO\nOOOO\nOOOO")
+        end
+      end
+
+      describe "#clear" do
+        let(:image) { subject.new(4,4) }
+
+        it 'clears the image to default value O' do
+          image.colour(2, 2, 'B')
+          image.clear
+          image.show.should eql("OOOO\nOOOO\nOOOO\nOOOO")
+        end
+      end
     end
   end
 

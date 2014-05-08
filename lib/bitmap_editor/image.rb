@@ -1,7 +1,7 @@
 module BitmapEditor
 
   class Image
-    MAX_DIMENSION  = 250
+    MAX_DIMENSION       = 250
     DEFAULT_PIXEL_COLOR = 'O'
 
     attr_reader :pixels
@@ -20,6 +20,14 @@ module BitmapEditor
 
     def show
       pixels.map { |n| n.join("") }.join("\n")
+    end
+
+    def clear
+      pixels.map! { |n| n.map { |m| m = DEFAULT_PIXEL_COLOR } }
+    end
+
+    def colour(x, y, c)
+      pixels[y.to_i - 1][x.to_i - 1] = c
     end
 
   end
