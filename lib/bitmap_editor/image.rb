@@ -33,5 +33,9 @@ module BitmapEditor
     def vertical(x, y1, y2, c)
       (y1..y2).each { |y| colour(x, y, c) }
     end
+
+    def horizontal(x1, x2, y, c)
+      (x1..x2).each { |x| colour(x, y, c) }
+    end
   end
 end

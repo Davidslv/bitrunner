@@ -4,6 +4,7 @@ require 'bitmap_editor/image'
 module BitmapEditor
   describe Image do
     subject { described_class }
+    let(:image) { subject.new(4,4) }
 
     describe "#new" do
       context 'when image is bigger than 250x250' do
@@ -34,17 +35,18 @@ module BitmapEditor
       end
 
       describe "#colour" do
-        let(:image) { subject.new(4,4) }
-
         it 'colours the image with A at X1 Y2' do
+          #   1 2 3 4
+          # 1 A O O O
+          # 2 O O O O
+          # 3 O O O O
+          # 4 O O O O
           image.colour(1, 2, 'A')
           image.show.should eql("OOOO\nAOOO\nOOOO\nOOOO")
         end
       end
 
       describe "#clear" do
-        let(:image) { subject.new(4,4) }
-
         it 'clears the image to default value O' do
           image.colour(2, 2, 'B')
           image.clear
@@ -53,12 +55,28 @@ module BitmapEditor
       end
 
       describe "#vertical" do
-        let(:image) { subject.new(4,4) }
-
         it 'draws vertically between Y1 and Y2 in column X' do
+          #   1 2 3 4
+          # 1 O O O O
+          # 2 X O O O
+          # 3 X O O O
+          # 4 X O O O
           image.vertical(1, 2, 4, 'X')
           image.show.should eql("OOOO\nXOOO\nXOOO\nXOOO")
         end
+      end
+
+      describe "#horizontal" do
+        it 'draws horizontally between X1 and X2 in row Y' do
+          #   1 2 3 4
+          # 1 O O O O
+          # 2 O O O O
+          # 3 R R R O
+          # 4 O O O O
+          image.horizontal(1, 3, 3, 'R')
+          image.show.should eql("OOOO\nOOOO\nRRRO\nOOOO")
+        end
+
       end
     end
   end
