@@ -76,6 +76,44 @@ module BitmapEditor
           image.horizontal(1, 3, 3, 'R')
           image.show.should eql("OOOO\nOOOO\nRRRO\nOOOO")
         end
+      end
+
+      describe "#fill" do
+        # Fills the region R with the colour C. R is defined as: Pixel (X,Y) belongs to R.
+        # Any other pixel which is the same colour as (X,Y) and shares a common side with any pixel in R also belongs to this region.
+
+        context 'when there is a "blank" image' do
+
+          it 'fills the entire image with color E' do
+            # INITIAL     # FILL
+            #   1 2 3 4   #   1 2 3 4
+            # 1 O O O O   # 1 E E E E
+            # 2 O O O O   # 2 E E E E
+            # 3 O O O O   # 3 E E E E
+            # 4 O O O O   # 4 E E E E
+
+            image.fill(2, 3, 'E')
+            image.show.should eql("EEEE\nEEEE\nEEEE\nEEEE")
+          end
+        end
+
+        context 'when there is already one pixel filled' do
+          # INITIAL     # FILL
+          #   1 2 3 4   #   1 2 3 4
+          # 1 O O O O   # 1 E E E E
+          # 2 O A O O   # 2 E A E E
+          # 3 O O O O   # 3 E E E E
+          # 4 O O O O   # 4 E E E E
+
+          before do
+            image.colour(2, 2, 'A')
+          end
+
+          it 'fills all other pixels color E' do
+            image.fill(4, 4, 'E')
+            image.show.should eql("EEEE\nEAEE\nEEEE\nEEEE")
+          end
+        end
 
       end
     end
