@@ -53,7 +53,9 @@ module BitmapEditor
       when 'L'
         @image.colour(*params)
       when 'V'
+        @image.vertical(*params)
       when 'H'
+        @image.horizontal(*params)
       when 'F'
       when 'S'
         puts @image.show
