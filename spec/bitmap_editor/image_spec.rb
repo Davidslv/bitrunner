@@ -4,7 +4,7 @@ require 'bitmap_editor/image'
 module BitmapEditor
   describe Image do
     subject { described_class }
-    let(:image) { subject.new(4,4) }
+    let(:image) { subject.new(4, 4) }
 
     describe "#new" do
       context 'when image is bigger than 250x250' do
@@ -30,7 +30,7 @@ module BitmapEditor
     end
 
     describe "#show" do
-      subject { described_class.new(5,5) }
+      subject { described_class.new(5, 5) }
 
       its(:show) { should eql("OOOOO\nOOOOO\nOOOOO\nOOOOO\nOOOOO") }
     end
@@ -110,7 +110,7 @@ module BitmapEditor
           image.colour(2, 2, 'A')
         end
 
-        it 'fills all other pixels color E' do
+        it 'does not fill it with color E' do
           image.fill(4, 4, 'E')
           image.show.should eql("EEEE\nEAEE\nEEEE\nEEEE")
         end

@@ -57,6 +57,7 @@ module BitmapEditor
       when 'H'
         @image.horizontal(*params)
       when 'F'
+        @image.fill(*params)
       when 'S'
         puts @image.show
       when 'X'
