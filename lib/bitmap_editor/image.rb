@@ -30,5 +30,8 @@ module BitmapEditor
       pixels[y.to_i - 1][x.to_i - 1] = c
     end
 
+    def vertical(x, y1, y2, c)
+      (y1..y2).each { |y| colour(x, y, c) }
+    end
   end
 end

@@ -51,6 +51,15 @@ module BitmapEditor
           image.show.should eql("OOOO\nOOOO\nOOOO\nOOOO")
         end
       end
+
+      describe "#vertical" do
+        let(:image) { subject.new(4,4) }
+
+        it 'draws vertically between Y1 and Y2 in column X' do
+          image.vertical(1, 2, 4, 'X')
+          image.show.should eql("OOOO\nXOOO\nXOOO\nXOOO")
+        end
+      end
     end
   end
 
