@@ -7,19 +7,15 @@ module BitmapEditor
     attr_reader :pixels
 
     def initialize(m, n)
-      m, n = m.to_i, n.to_i
+      validate_dimmensions(m, n)
 
-      if ( (0 < m && m > MAX_DIMENSION) || (0 < n && n > MAX_DIMENSION) )
-        raise 'Your bitmap image should not be smaller than 0 neither bigger than 250'
-      end
-
-      @pixels = Array.new
-
-      n.times { @pixels << Array.new(m, DEFAULT_PIXEL_COLOR) }
+      @width  = m
+      @height = n
+      @pixels = Array.new(@height) { Array.new(@width) { DEFAULT_PIXEL_COLOR } }
     end
 
     def show
-      pixels.map { |n| n.join("") }.join("\n")
+      pixels.map(&:join).join("\n")
     end
 
     def clear
@@ -36,6 +32,14 @@ module BitmapEditor
 
     def horizontal(x1, x2, y, c)
       (x1..x2).each { |x| colour(x, y, c) }
+    end
+
+    private
+
+    def validate_dimmensions(m, n)
+      if ( (0 < m && m > MAX_DIMENSION) || (0 < n && n > MAX_DIMENSION) )
+        raise 'Your bitmap image should not be smaller than 0 neither bigger than 250'
+      end
     end
   end
 end
