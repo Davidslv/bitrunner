@@ -36,8 +36,8 @@ module BitmapEditor
     end
 
     def fill(x, y, c)
-      x = x - 1
-      y = y - 1
+      x = x.to_i - 1
+      y = y.to_i - 1
       flood_fill(x, y, c)
     end
 
