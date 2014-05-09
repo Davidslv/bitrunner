@@ -46,7 +46,7 @@ module BitmapEditor
     def flood_fill(x, y, c)
       return if (x < MIN_DIMENSION || x == @width)
       return if (y < MIN_DIMENSION || y == @height)
-      return if (pixels[y][x] == c)
+      return if (pixels[y][x] == c) || (pixels[y][x] != 'O')
 
       pixels[y][x] = c
 
