@@ -11,6 +11,11 @@ $ bundle
 $ ./bitrunner
 ```
 
+## How to run the tests
+```shell
+$ bundle
+$ bundle exec rspec
+```
 ## Need help?
 
 Press `?` so you can see the list of commands you can do.
