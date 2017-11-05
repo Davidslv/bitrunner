@@ -33,5 +33,11 @@ PLATFORMS
 DEPENDENCIES
   pry
   pry-nav
-  rspec (= 2.9.0)
+  rspec
   simplecov
+
+RUBY VERSION
+   ruby 2.4.0p0
+
+BUNDLED WITH
+   1.15.1
