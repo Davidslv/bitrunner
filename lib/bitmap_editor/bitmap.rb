@@ -4,13 +4,13 @@ module BitmapEditor
     MAX_DIMENSION       = 250
     DEFAULT_PIXEL_COLOR = 'O'
 
-    attr_reader :pixels
+    attr_reader :bitmap
 
     def initialize(width, height)
-      validate_dimmensions(@width, @height)
+      validate_dimmensions(width, height)
       @width  = width
       @height = height
-      init(width, height)
+      @bitmap = init(width, height)
     end
 
     def show
