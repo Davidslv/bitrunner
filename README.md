@@ -4,7 +4,7 @@ A Bitmap Editor exercise written in Ruby
 
 ## How to run?
 
-You will need ruby 2.1.0 to run this program.
+You will need at least ruby version 2.2.0 to run this program.
 
 ```shell
 $ bundle
