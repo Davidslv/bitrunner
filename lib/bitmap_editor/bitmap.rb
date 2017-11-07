@@ -1,18 +1,16 @@
 module BitmapEditor
-
-  class Image
+  class Bitmap
     MIN_DIMENSION       = 0
     MAX_DIMENSION       = 250
     DEFAULT_PIXEL_COLOR = 'O'
 
     attr_reader :pixels
 
-    def initialize(m, n)
-      @width  = m.to_i
-      @height = n.to_i
+    def initialize(width, height)
       validate_dimmensions(@width, @height)
-
-      @pixels = Array.new(@height) { Array.new(@width) { DEFAULT_PIXEL_COLOR } }
+      @width  = width
+      @height = height
+      init(width, height)
     end
 
     def show
@@ -20,7 +18,7 @@ module BitmapEditor
     end
 
     def clear
-      pixels.map! { |n| n.map { |m| m = DEFAULT_PIXEL_COLOR } }
+      init(width, height)
     end
 
     def colour(x, y, c)
@@ -43,21 +41,15 @@ module BitmapEditor
 
     private
 
-    def flood_fill(x, y, c)
-      return if (x < MIN_DIMENSION || x == @width)
-      return if (y < MIN_DIMENSION || y == @height)
-      return if (pixels[y][x] == c) || (pixels[y][x] != 'O')
-
-      pixels[y][x] = c
-
-      flood_fill(x - 1, y, c)
-      flood_fill(x + 1, y, c)
-      flood_fill(x, y + 1, c)
-      flood_fill(x, y - 1, c)
+    def init(width, height)
+      Array.new(height) do
+        Array.new(width) { DEFAULT_PIXEL_COLOR }
+      end
     end
 
     def validate_dimmensions(width, height)
-      if ( (MIN_DIMENSION < width && width > MAX_DIMENSION) || (MIN_DIMENSION < height && height > MAX_DIMENSION) )
+      if ( (MIN_DIMENSION < width && width > MAX_DIMENSION) ||
+        (MIN_DIMENSION < height && height > MAX_DIMENSION) )
         raise 'Your bitmap image should not be smaller than 0 neither bigger than 250'
       end
     end
