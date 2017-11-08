@@ -2,7 +2,7 @@ module BitmapEditor
   class Bitmap
     MIN_DIMENSION       = 0
     MAX_DIMENSION       = 250
-    DEFAULT_PIXEL_COLOR = 'O'
+    DEFAULT_PIXEL_COLOR = 'O'.freeze
 
     attr_reader :bitmap, :width, :height
 
@@ -12,7 +12,15 @@ module BitmapEditor
       init(width, height)
     end
 
-    def clear
+    def set(x, y, c)
+      bitmap[x][y] = c
+    end
+
+    def get(x, y)
+      bitmap[x][y]
+    end
+
+    def clear!
       init(width, height)
     end
 
