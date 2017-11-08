@@ -13,11 +13,11 @@ module BitmapEditor
     end
 
     def set(x, y, c)
-      bitmap[x][y] = c
+      bitmap[y][x] = c
     end
 
     def get(x, y)
-      bitmap[x][y]
+      bitmap[y][x]
     end
 
     def clear!
