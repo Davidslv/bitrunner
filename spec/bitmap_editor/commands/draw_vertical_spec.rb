@@ -5,16 +5,6 @@ require './lib/bitmap_editor/commands/draw_vertical'
 module BitmapEditor
   module Commands
     RSpec.describe DrawVertical do
-      def assert_equal_bitmap(bitmap, expected)
-        expected.each_with_index do |row, y|
-          row.each_with_index do |_column, x|
-            expect(
-              bitmap.get(x, y)
-            ).to eql expected[y][x]
-          end
-        end
-      end
-
       context 'when receives coordinates' do
         let(:bitmap) { Bitmap.new(3, 4) }
         let(:subject) { described_class.new(bitmap, 1, 0, 2, 'A') }
