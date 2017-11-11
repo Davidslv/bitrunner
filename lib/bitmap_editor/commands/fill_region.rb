@@ -1,8 +1,6 @@
 module BitmapEditor
   module Commands
     class FillRegion
-      attr_reader :bitmap, :x, :y, :c
-
       def initialize(bitmap, x, y, c)
         @bitmap = bitmap
         @x, @y, @c = x, y, c
@@ -13,6 +11,7 @@ module BitmapEditor
       end
 
       private
+      attr_reader :bitmap, :x, :y, :c
 
       def _fill(x, y, c)
         return if (x < MIN_DIMENSION || x == @width)
