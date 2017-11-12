@@ -68,6 +68,38 @@ module BitmapEditor
           end
         end
       end
+
+      context "when is a complex bitmap" do
+        let(:bitmap) { Bitmap.new(6, 5) }
+        subject { FillRegion.new(bitmap, 3, 2, "Y") }
+
+        before do
+          build(
+            bitmap,
+            [
+              %w(X X O O X O),
+              %w(X X O O O O),
+              %w(O O X X O O),
+              %w(X X O O X X),
+              %w(X X A A O O),
+            ]
+          )
+        end
+
+        it "changes the region colour" do
+          subject.perform
+          binding.pry
+          expected = [
+            %w(Y Y O O X O),
+            %w(Y Y O O O O),
+            %w(O O Y Y O O),
+            %w(Y Y O O Y Y),
+            %w(Y Y A A O O),
+          ]
+
+          assert_equal_bitmap(bitmap, expected)
+        end
+      end
     end
   end
 end
