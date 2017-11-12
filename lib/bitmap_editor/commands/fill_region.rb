@@ -21,16 +21,9 @@ module BitmapEditor
         if bitmap.get(x, y) == original_color
           bitmap.set(x, y, c)
 
-          puts "west"
           _fill(x - 1, y, c) # west
-          puts "east"
           _fill(x + 1, y, c) # east
-
-          puts "south"
-          puts "x: #{x+1}, y: #{y}, c: #{c}"
-          binding.pry
           _fill(x, y + 1, c) # south
-          puts "north"
           _fill(x, y - 1, c) # north
         end
       end
