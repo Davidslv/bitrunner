@@ -29,5 +29,60 @@ module BitmapEditor
         expect(bitmap.get(1, 2)).to eql 'O'
       end
     end
+
+    describe '#valid_coordinates?' do
+      context 'when coordinate is out of bounds' do
+        it 'returns false for coordinate next to left side' do
+          expect(
+            bitmap.valid_coordinates?(-1, 0)
+          ).to be false
+        end
+
+        it 'returns false for coordiate over the top' do
+          expect(
+            bitmap.valid_coordinates?(0, -1)
+          ).to be false
+        end
+
+        it 'returns false for coordinate next to right side' do
+          expect(
+            bitmap.valid_coordinates?(3, 1)
+          ).to be false
+        end
+
+        it 'returns false for coordinate under the bottom' do
+          expect(
+            bitmap.valid_coordinates?(1, 4)
+          ).to be false
+        end
+      end
+
+      context 'when coordinate is within bounds' do
+        it 'returns true for top-left' do
+          expect(
+            bitmap.valid_coordinates?(0, 0)
+          ).to be true
+        end
+
+        it 'returns true for top-right' do
+          expect(
+
+            bitmap.valid_coordinates?(2, 0)
+          ).to be true
+        end
+
+        it 'returns true for bottom-right' do
+          expect(
+            bitmap.valid_coordinates?(2, 3)
+          ).to be true
+        end
+
+        it 'returns true for bottom-left' do
+          expect(
+            bitmap.valid_coordinates?(0, 3)
+          ).to be true
+        end
+      end
+    end
   end
 end
