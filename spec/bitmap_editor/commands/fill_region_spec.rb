@@ -40,11 +40,13 @@ module BitmapEditor
           let(:subject) { described_class.new(bitmap, 2, 3, 'F') }
 
           it 'colors the region where color "O" is with color "F"' do
+            # x: 2, y: 3, c: F
             expected = [
-              %w(A A O),
-              %w(A B B),
-              %w(A B F),
-              %w(A F F),
+               # 0 1 2 
+              %w(A A O), # 0
+              %w(A B B), # 1
+              %w(A B F), # 2
+              %w(A F F), # 3
             ]
 
             subject.perform
