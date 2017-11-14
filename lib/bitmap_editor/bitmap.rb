@@ -23,8 +23,8 @@ module BitmapEditor
       bitmap[y][x]
     end
 
-    def show
-      puts bitmap.map { |row| row.join(" ") }.join("\n")
+    def to_s
+      bitmap.map { |row| row.join(" ") }.join("\n")
     end
 
     def clear!

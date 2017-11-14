@@ -65,7 +65,7 @@ module BitmapEditor
       when 'F'
         Commands::FillRegion.new(@bitmap, *params).perform
       when 'S'
-        @bitmap.show
+        puts @bitmap
       when 'X'
         exit 0
       when '?'
