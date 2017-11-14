@@ -1,13 +1,13 @@
 #!/usr/bin/env ruby
 
-require 'readline'
-
 module BitmapEditor
-
   class App
-
     def initialize
       main
+    end
+
+    def self.start
+      new
     end
 
     private
