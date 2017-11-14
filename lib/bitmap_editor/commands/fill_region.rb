@@ -1,10 +1,11 @@
 module BitmapEditor
   module Commands
     class FillRegion
-      def initialize(bitmap, x, y, c)
+      def initialize(bitmap, x, y, c, validator = Validators::CoordinatesValidator)
         @bitmap = bitmap
         @x, @y, @c = x, y, c
         @original_color = bitmap.get(x, y)
+        @validator = validator
       end
 
       def perform
@@ -13,7 +14,7 @@ module BitmapEditor
       end
 
       private
-      attr_reader :bitmap, :x, :y, :c, :original_color
+      attr_reader :bitmap, :x, :y, :c, :original_color, :validator
 
       def _fill(x, y, c, visited = {})
         # Marks the visited coordinates before it validates
@@ -22,7 +23,7 @@ module BitmapEditor
         return if visited[x][y]
         visited[x][y] = true
 
-        return unless bitmap.valid_coordinates?(x, y)
+        return unless validator.new(bitmap, x, y).valid?
 
         if bitmap.get(x, y) == original_color
           bitmap.set(x, y, c)
