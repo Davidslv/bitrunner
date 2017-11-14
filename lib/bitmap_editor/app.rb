@@ -13,14 +13,15 @@ module BitmapEditor
     private
 
     def main
-      while line = Readline.readline('>', true)
+      while line = Readline.readline('> ', true)
         process_user_input(line) unless line.empty?
       end
     end
 
     def process_user_input(line)
-      command  = line[0].upcase
-      params   = line.upcase.split[1..-1]
+      line    = line.upcase
+      command = line.chr
+      params  = parsed_params(line.split[1..-1])
 
       if commands.keys.include?(command)
         process_command(command, params)
@@ -28,6 +29,11 @@ module BitmapEditor
         puts "You need to provide a valid command.\n"
         show_commands_list
       end
+    end
+
+    def parsed_params(params)
+      *coordinates, color = params
+      coordinates.map!(&:to_i) << color
     end
 
     def commands
@@ -47,19 +53,19 @@ module BitmapEditor
     def process_command(command, params)
       case command
       when 'I'
-        @image = Image.new(*params)
+        @bitmap = Bitmap.new(*params)
       when 'C'
-        @image.clear
+        @bitmap.clear!
       when 'L'
-        @image.colour(*params)
+        @bitmap.set(*params)
       when 'V'
-        @image.vertical(*params)
+        Commands::DrawVertical.new(@bitmap, *params).perform
       when 'H'
-        @image.horizontal(*params)
+        Commands::DrawHorizontal.new(@bitmap, *params).perform
       when 'F'
-        @image.fill(*params)
+        Commands::FillRegion.new(@bitmap, *params).perform
       when 'S'
-        puts @image.show
+        @bitmap.show
       when 'X'
         exit 0
       when '?'

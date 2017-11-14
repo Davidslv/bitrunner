@@ -5,10 +5,10 @@ module BitmapEditor
     attr_reader :width, :height
 
     def initialize(width, height, validator = Validators::CoordinatesValidator)
-      @width  = width
-      @height = height
+      @width  = Integer(width)
+      @height = Integer(height)
       @validator = validator
-      init(width, height)
+      init(@width, @height)
     end
 
     def set(x, y, c)
@@ -21,6 +21,10 @@ module BitmapEditor
       validate_input!(x, y)
 
       bitmap[y][x]
+    end
+
+    def show
+      puts bitmap.map { |row| row.join(" ") }.join("\n")
     end
 
     def clear!
