@@ -5,5 +5,4 @@ group :test do
   gem 'rspec'
   gem 'pry'
   gem 'pry-nav'
-  gem 'simplecov'
 end
