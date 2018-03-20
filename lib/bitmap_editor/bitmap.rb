@@ -1,22 +1,25 @@
 module BitmapEditor
   class Bitmap
-    MIN_DIMENSION       = 0
-    MAX_DIMENSION       = 250
     DEFAULT_PIXEL_COLOR = 'O'.freeze
 
     attr_reader :width, :height
 
-    def initialize(width, height)
+    def initialize(width, height, validator = Validators::CoordinatesValidator)
       @width  = width
       @height = height
+      @validator = validator
       init(width, height)
     end
 
     def set(x, y, c)
+      validate_input!(x, y)
+
       bitmap[y][x] = c
     end
 
     def get(x, y)
+      validate_input!(x, y)
+
       bitmap[y][x]
     end
 
@@ -32,13 +35,8 @@ module BitmapEditor
       bitmap.size
     end
 
-    def valid_coordinates?(x, y)
-      validate_coordinate(x, width) &&
-      validate_coordinate(y, height)
-    end
-
     private
-    attr_reader :bitmap
+    attr_reader :bitmap, :validator
 
     def init(width, height)
       @bitmap = Array.new(height) do
@@ -46,8 +44,10 @@ module BitmapEditor
       end
     end
 
-    def validate_coordinate(position, dimension)
-      position.between?(MIN_DIMENSION, dimension - 1)
+    def validate_input!(x, y)
+      unless validator.new(self, x, y).valid?
+        raise Errors::OutOfBoundariesError.new(self, x, y)
+      end
     end
   end
 end
