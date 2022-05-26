@@ -31,6 +31,9 @@ Naming/MethodParameterName:
 Metrics/CyclomaticComplexity:
   Max: 10
 
+# Metrics/AbcSize:
+#   Max: 20
+
 Gemspec/DateAssignment:
   Enabled: true
 Gemspec/RequireMFA:

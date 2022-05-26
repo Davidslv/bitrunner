@@ -1,4 +1,3 @@
-require 'spec_helper'
 require './lib/bitmap_editor/bitmap'
 require './lib/bitmap_editor/validators/base'
 require './lib/bitmap_editor/validators/coordinates_validator'
