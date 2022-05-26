@@ -17,5 +17,9 @@ jobs:
         ruby-version: ${{ matrix.ruby-version }}
     - name: Install dependencies
       run: RUBYOPT='--disable-did_you_mean' bundle install
+
+    - name: Rubocop (Linter)
+      run: bundle exec rubocop
+
     - name: Run tests
       run: bundle exec rspec
