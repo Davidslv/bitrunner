@@ -24,6 +24,12 @@ AllCops:
     - 'bin/**/*'
     - 'spec/**/*'
 
+Naming/MethodParameterName:
+  # the only reason this is 1 is because x and y coordinates make sense
+  MinNameLength: 1
+
+Metrics/CyclomaticComplexity:
+  Max: 10
 
 Gemspec/DateAssignment:
   Enabled: true

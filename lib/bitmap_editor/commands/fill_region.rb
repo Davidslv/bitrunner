@@ -1,9 +1,13 @@
+# frozen_string_literal: true
+
 module BitmapEditor
   module Commands
     class FillRegion
       def initialize(bitmap, x, y, c, validator = Validators::CoordinatesValidator)
         @bitmap = bitmap
-        @x, @y, @c = x, y, c
+        @x = x
+        @y = y
+        @c = c
         @original_color = bitmap.get(x, y)
         @validator = validator
       end
@@ -14,6 +18,7 @@ module BitmapEditor
       end
 
       private
+
       attr_reader :bitmap, :x, :y, :c, :original_color, :validator
 
       def _fill(x, y, c, visited = {})
@@ -21,6 +26,7 @@ module BitmapEditor
         # so it doesn't have to validate the same coordinate again.
         visited[x] ||= {}
         return if visited[x][y]
+
         visited[x][y] = true
 
         return unless validator.new(bitmap, x, y).valid?
