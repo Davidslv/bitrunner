@@ -29,6 +29,10 @@ module BitmapEditor
       end
     end
 
+    describe '#to_s' do
+      it { expect(bitmap.to_s).to eq("O O O\nO O O\nO O O\nO O O") }
+    end
+
     describe '#set' do
       context 'when within bitmap boundaries' do
         it 'sets a coordinate with a given colour' do
