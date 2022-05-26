@@ -1,8 +1,8 @@
+# frozen_string_literal: true
+
 module BitmapEditor
   class Bitmap
-    DEFAULT_PIXEL_COLOR = 'O'.freeze
-
-    attr_reader :width, :height
+    DEFAULT_PIXEL_COLOR = 'O'
 
     def initialize(width, height, validator = Validators::CoordinatesValidator)
       @width  = Integer(width)
@@ -24,11 +24,11 @@ module BitmapEditor
     end
 
     def to_s
-      bitmap.map { |row| row.join(" ") }.join("\n")
+      bitmap.map { |row| row.join(' ') }.join("\n")
     end
 
     def clear!
-      init(width, height)
+      init(@width, @height)
     end
 
     def width
@@ -40,6 +40,7 @@ module BitmapEditor
     end
 
     private
+
     attr_reader :bitmap, :validator
 
     def init(width, height)
@@ -49,9 +50,7 @@ module BitmapEditor
     end
 
     def validate_input!(x, y)
-      unless validator.new(self, x, y).valid?
-        raise Errors::OutOfBoundariesError.new(self, x, y)
-      end
+      raise Errors::OutOfBoundariesError.new(self, x, y) unless validator.new(self, x, y).valid?
     end
   end
 end

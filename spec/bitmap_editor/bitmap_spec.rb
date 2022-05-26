@@ -1,4 +1,3 @@
-require 'spec_helper'
 require './lib/bitmap_editor/validators/base'
 require './lib/bitmap_editor/validators/coordinates_validator'
 require './lib/bitmap_editor/errors/out_of_boundaries_error'
@@ -28,6 +27,10 @@ module BitmapEditor
           }.to raise_error(Errors::OutOfBoundariesError, expected_message)
         end
       end
+    end
+
+    describe '#to_s' do
+      it { expect(bitmap.to_s).to eq("O O O\nO O O\nO O O\nO O O") }
     end
 
     describe '#set' do

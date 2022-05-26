@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module BitmapEditor
   module Validators
     class Base
@@ -6,10 +8,12 @@ module BitmapEditor
 
       def initialize(bitmap, x, y)
         @bitmap = bitmap
-        @x, @y = x, y
+        @x = x
+        @y = y
       end
 
       protected
+
       attr_reader :bitmap, :x, :y
     end
   end
